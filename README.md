@@ -23,7 +23,7 @@ Este proyecto construye una infraestructura como código en AWS usando Terraform
 7. [Gestión del archivo lock](#7-Gestión-del-archivo-lock)  
 8. [Consideraciones](#8-Consideraciones)  
 
-# 1 Estructura del repositorio
+# 1. Estructura del repositorio
 - docker  
   - Dockerfile  
   - verify.sh  
@@ -37,7 +37,7 @@ Este proyecto construye una infraestructura como código en AWS usando Terraform
 - .gitignore  
 - README.md
 
-# 2 Contenido de cada archivo
+# 2. Contenido de cada archivo
 - docker  
   - `Dockerfile`:Contiene la configuración necesaria para construir la imagen Docker basada en Red Hat 9. Incluye la instalación del servidor Apache y herramientas como psql para conectarse a la base de datos.
   - `verify.sh`: Script auxiliar para validar que el contenedor se ha levantado correctamente y que el servidor Apache está respondiendo.
