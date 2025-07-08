@@ -3,7 +3,7 @@
 Este proyecto construye una infraestructura como código en AWS usando Terraform. Crea un servcio de base de datos RDS, con su respectiva VPC, subredes, tablas de ruta, y politicas de seguridad para el acceso y crea un servicio de computo con una imagen Docker funcional que además se puede encontrar en DockerHub, con las siguientes especificaciones:
 
 - Git
-- VS Code (no CLI disponible, para Linux, no se realiza instalación)
+- VS Code (no CLI disponible para Linux, por lo tanto no se realiza instalación)
 - Maven
 - PostgreSQL
 - Java JRE
