@@ -21,7 +21,8 @@ Este proyecto construye una infraestructura como código en AWS usando Terraform
 5. [Justificación de recursos usados](#5-Justificación-de-recursos-usados)  
 6. [Gestión del state file](#6-Gestión-del-state-file)  
 7. [Gestión del archivo lock](#7-Gestión-del-archivo-lock)  
-8. [Consideraciones](#8-Consideraciones)  
+8. [Repositorio de imagen en DockerHub](#8-Repositorio-de-imagen-en-DockerHub)
+9. [Consideraciones](#8-Consideraciones)  
 
 # 1. Estructura del repositorio
 - docker  
@@ -95,15 +96,25 @@ Para validar la conexión entre el docker y la base de datos AWS se puede hacer 
 psql -h <rds_endpoint> -U reto_user -d reto_db
 ```
 Reemplazando el endpoint que se generó en el output de terraform. 
-Si la conexión funciona debe pedir la clava para acceder a la base de datos, en este caso está definida como Password123! en la configuración. (Idealmente se debe asignar una variable guardada en un archivo seguro o en un vault)
+Si la conexión funciona debe pedir la clave para acceder a la base de datos, en este caso está definida como Password123! en la configuración. (Idealmente se debe asignar una variable guardada en un archivo seguro o en un vault)
 # 5. Justificación de recursos usados
 - **EC2:** Se optó por utilizar EC2 en lugar de ECS o EKS por ser una solución más directa y controlable para un entorno pequeño. EC2 permite desplegar contenedores con suficiente flexibilidad, sin la necesidad de administrar clústeres o configurar algún orquestador, lo cual simplifica la estructura del proyecto y los costos asociados en AWS, también se eligió una instancia apropiada dentro del Free Tier del primer año gratis de AWS, (en mi caso generó costos mínimos por estar fuera del primer año).
-- **RDS PostgreSQL:** Se eligió RDS con PostgreSQL por ser una base de datos relacional gestionada, lo que hace que sea fácil de usar. Frente a otras opciones como DynamoDB (NoSQL) o Aurora (más costosa y compleja). Para entornos pequeños como este resulta una opción econnómica y sencilla. Además de fácil de conectar con el EC2 encontrandose dentro de la misma VPC.
+
+- **RDS PostgreSQL:** Se eligió RDS con PostgreSQL por ser una base de datos relacional gestionada, lo que hace que sea fácil de usar. Frente a otras opciones como DynamoDB (NoSQL) o Aurora (más costosa y compleja). Para entornos pequeños como este resulta una opción económica y sencilla. Además de fácil de conectar con el EC2 encontrandose dentro de la misma VPC.
 # 6. Gestión del state file
 El `terraform.tfstate` es el archivo donde Terraform guarda el estado actual de la infraestructura. Este archivo no debe modificarse manualmente ni compartirse sin control. Para este proyecto se almacena de forma local, para proyectos colaborativos, se recomienda almacenar el state file en un backend remoto como S3.
 # 7. Gestión del archivo lock
 El archivo `.terraform.lock.hcl` asegura que se usen las mismas versiones de proveedores (como AWS) en cada ejecución de Terraform. Esto evita inconsistencias cuando se trabaja en diferentes entornos o equipos.
-# 8. Consideraciones
+# 8. Repositorio de imagen en DockerHub
+Ingresar en el navegador la URL de la imagen en DockerHub
+```bash
+https://hub.docker.com/repository/docker/lilianar/reto-devops/general
+```
+Para descargar desde un entorno local con docker
+```bash
+docker push lilianar/reto-devops:latest
+```
+# 9. Consideraciones
 
 - Se requiere acceso a internet desde la instancia EC2 para descargar Docker y conectarse a RDS.
 
