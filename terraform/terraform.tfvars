@@ -1,0 +1,5 @@
+aws_region = "us-east-1"
+allowed_ip = "186.82.104.61/32"
+instance_type = "t2.medium"
+key_name = "terraform-key"
+db_username = "reto_user"
